@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My home page from route</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form action="javascript:void(0);">
+    First name: <input id="firstname" type="text" name="fname"><br>
+    Last name: <input id="lastname" type="text" name="lname"><br>
+    <input id="submitButton" type="submit" value="Submit">
+</form>
+<div id="myDiv"></div>
+
+</body>
+
+<script>
+    $("#submitButton").click(function(){
+        var firstName = document.getElementById("firstname").value;
+        var lastName = document.getElementById("lastname").value;
+
+        $.post("/myPost",
+            {
+                firstname: firstName,
+                lastname: lastName,
+            },
+            function(data){
+                $("#myDiv").html(data.fullname);
+                // alert("Full name: " + data.fullname);
+            });
+    });
+</script>
+
+</html>
